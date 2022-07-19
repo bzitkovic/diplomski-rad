@@ -1,0 +1,203 @@
+body {
+    background-color: #F1FAEE;
+}
+
+.my-small-btn {
+    width: 250px;
+    margin-top: 200px;
+}
+
+.cover-text {
+    color: azure;
+    padding: 5px;
+    line-height: 100px;
+    text-align: center;
+}
+
+.home-cards {
+    padding: 20px;
+
+}
+
+.home-cards img {
+    width: auto;    
+}
+
+.home-cards-row {
+    margin: 0 50px 0 50px;
+}
+
+.card {
+    padding: 10px;
+    background-color: #F1FAEE !important;
+}
+
+.card-1 {
+    background-image: url('../images/image_06.jpg')
+}
+
+.card-2 {
+    background-image: url('../images/image_07.jpg')
+}
+
+.card-3 {
+    background-image: url('../images/image_05.jpg')
+}
+
+.w-100 {
+    width: 100% !important;
+    height: 85vh;
+}
+
+.share-story {
+    height: 200px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.navbar a {
+    color: white;
+}
+
+.nav a {
+    color: #1D3557;;
+}
+
+.btn-primary {
+    border: none;
+    background-color: #E63946;
+}
+
+.btn-primary:hover {
+    background-color: #1D3557;
+}
+
+.register {
+    height: 300px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.card-register {
+    width: 600px;
+}
+
+.login-form {
+    margin-top: 150px;
+}
+
+#map { 
+    position: relative;
+    border: 1px solid black;
+    border-radius: 8px;
+    height: 500px;  /* or as desired */
+    width: 50%; 
+    margin: 0 25% 50px 25% 
+    
+}
+
+.card-body {
+    margin-top: 0px;
+    padding-bottom: 0 !important;
+}
+
+.img-fluid {
+    border-radius: 5%;
+}
+
+.profile-friends{
+    align-items: left;
+}
+
+.page-item.active .page-link {
+    color: #fff !important;
+    background: #1D3557 !important;
+  }
+
+.page-item {
+    background-color: #F1FAEE;
+}
+
+.page-link {
+    color: #1D3557;
+}
+
+/*  */
+
+.padding {
+    padding: 3rem !important;
+    margin-left: 200px
+}
+
+.card-img-top{
+    height:300px;
+}
+
+.card-no-border .card {
+    border-color: #d7dfe3;
+    border-radius: 4px;
+    margin-bottom: 30px;
+    -webkit-box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05)
+}
+
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem
+}
+
+.pro-img {
+    margin-top: -80px;
+    margin-bottom: 20px
+}
+
+.little-profile .pro-img img {
+    width: 128px;
+    height: 128px;
+    -webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    border-radius: 100%
+}
+
+html body .m-b-0 {
+    margin-bottom: 0px
+}
+
+
+.btn-rounded.btn-md {
+    padding: 12px 35px;
+    font-size: 16px
+}
+
+html body .m-t-10 {
+    margin-top: 10px
+}
+
+.btn-primary,
+.btn-primary.disabled {       
+    transition: 0.2s ease-in
+}
+
+.m-t-20 {
+    margin-top: 20px
+}
+
+.text-center {
+    text-align: center !important
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 { 
+    font-weight: 400
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem
+}
+

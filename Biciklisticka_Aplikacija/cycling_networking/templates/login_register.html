@@ -1,0 +1,138 @@
+{% extends 'main.html' %} {% block content %} {% load static %} 
+{% if page == 'loginPage' %}
+<section class="vh-100" style="background-color: #f1faee">
+  <form action="#" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-11">
+          <div class="card" style="border-radius: 1rem">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img
+                  src="{% static 'images/image_08.jpg' %}"
+                  alt="login form"
+                  class="img-fluid"
+                  style="border-radius: 1rem 0 0 1rem"
+                />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img
+                      src="{% static 'images/logo.png' %}"
+                      alt="logo"
+                      class="img-fluid"
+                      style="width: 225px; height: 200px"
+                    />
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                    Prijavi se
+                  </h5>
+
+                  <div class="form-outline mb-4">
+                    <input
+                      id="username"
+                      type="username"
+                      name="username"
+                      id="form2Example17"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="form2Example17"
+                      >Korisničko ime</label
+                    >
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <input
+                      id="password"
+                      type="password"
+                      name="password"
+                      id="form2Example27"
+                      class="form-control form-control-lg"
+                    />
+                    <label class="form-label" for="form2Example27"
+                      >Lozinka</label
+                    >
+                  </div>
+
+                  <div class="pt-1 mb-4">
+                    <button
+                      class="btn btn-primary btn-lg btn-block"
+                      type="submit"
+                    >
+                      Prijavi se
+                    </button>
+                  </div>
+
+                  <p class="mb-5 pb-lg-2" style="color: #393f81">
+                    Nemaš račun?
+                    <a href="register" style="color: #393f81">Registriraj se</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+
+{% else %}
+<section class="vh-200" style="background-color: #f1faee">
+  <form action="#" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-xl-12">
+          <div class="card" style="border-radius: 1rem">
+            <div class="row g-0">
+              <div class="col-md-6 col-lg-5 d-none d-md-block">
+                <img
+                  src="{% static 'images/image_08.jpg' %}"
+                  alt="login form"
+                  class="img-fluid"
+                  style="border-radius: 1rem 0 0 1rem; height: 1350px"
+                />
+              </div>
+              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                <div class="card-body p-4 p-lg-5 text-black">
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <img
+                      src="{% static 'images/logo.png' %}"
+                      alt="logo"
+                      class="img-fluid"
+                      style="width: 150px; height: 150px"
+                    />
+                  </div>
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px">
+                    Registriraj se
+                  </h5>
+
+                  {% for field in form %}
+                  <div class="form-outline mb-4">
+                    <label for="user">{{ field.label }}</label>
+                    {{ field }}
+                  </div>
+                  {% endfor %}
+
+                  <div class="pt-1 mb-4">
+                    <button
+                      class="btn btn-primary btn-lg btn-block"
+                      type="submit"
+                    >
+                      Registriraj se
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</section>
+{% endif %} {% endblock content %}

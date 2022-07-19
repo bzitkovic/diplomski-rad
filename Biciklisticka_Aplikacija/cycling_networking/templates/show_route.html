@@ -1,0 +1,161 @@
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+  <head>
+    <script
+      src="https://kit.fontawesome.com/ef37872397.js"
+      crossorigin="anonymous"
+    ></script>
+
+    {{map.header.render|safe}}
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          {% if map %} 
+            {{ map.html.render|safe }} 
+          {% endif %}
+        </div>
+        <div class="col-md-6 form-route">
+          <div class="col-md-4">
+            {% if ride.title == '' %}
+            <form class="form-new-route" action="#" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <h2 class="form-signin-heading">Nova vožnja</h2>
+              <br />
+
+              {% for field in form %}
+              <div class="form-outline mb-4">
+                <label for="ride">{{ field.label }}</label><br />
+                {{ field }}
+              </div>
+              {% endfor %}
+
+              <input
+                type="text"
+                for="start_latitude"
+                name="start_latitude"
+                value="{{ coors.0 }}"
+                disabled
+                hidden
+              />
+              <input
+                type="text"
+                name="start_longitude"
+                value="{{ coors.1 }}"
+                disabled
+                hidden
+              />
+              <input
+                type="text"
+                name="end_latitude"
+                value="{{ coors.2 }}"
+                disabled
+                hidden
+              />
+              <input
+                type="text"
+                name="end_longitude"
+                value="{{ coors.3 }}"
+                disabled
+                hidden
+              />
+              <div class="pt-1 mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">
+                  Kreiraj vožnju
+                </button>
+              </div>
+            </form>
+            {% else %}
+            <form
+              class="form-new-route"
+              action="updateRide?id={{ride.id}}"
+              method="POST"
+              enctype="multipart/form-data"
+            >
+              {% csrf_token %}
+              <h2>Vožnja {{ ride.title }}</h2>
+              <br />
+
+              {% for field in form %}
+              <div class="form-outline mb-4">
+                <label for="ride">{{ field.label }}</label><br />
+                {{ field }}
+              </div>
+              {% endfor %}
+              <div class="pt-1 mb-4">
+                <button
+                  name="updateRide"
+                  class="btn btn-primary btn-lg btn-block"
+                  type="submit"
+                  {% if ride.cyclist_id != request.user.id %}
+                    disabled
+                  {% endif %}
+                >
+                  Ažuriraj vožnju
+                </button>
+              </div>
+            </form>
+
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      * {
+        font-size: medium;
+      }
+
+      .nav-link:hover {
+        background-color: #f1faee !important;
+      }
+
+      .fs-4 {
+        font-size: 2.5rem !important;
+      }
+
+      .folium-map {
+        position: relative;
+        border: 1px solid black;
+        border-radius: 8px;
+        height: 500px !important;
+        width: 90% !important;
+        margin: 100px 0 200px 5% !important;
+      }
+
+      .col-md-4 {
+        margin: 100px 0 50px 0;
+        height: 400px;
+        width: 500px;
+      }
+
+      form.form-new-route > * {
+        margin: 5px !important;
+      }
+
+      .btn-primary {
+        border: none !important;
+        background-image: none;
+        background-color: #e63946 !important;
+        width: 200px;
+        height: 40px;
+      }
+
+      .btn-primary:hover {
+        background-color: #1d3557 !important;
+      }
+    </style>
+  </body>
+  {% include 'footer.html' %}
+  <script>
+    {{map.script.render | safe}}
+  </script>
+</html>
+{% endblock content %}

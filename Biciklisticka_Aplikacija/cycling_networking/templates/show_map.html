@@ -1,0 +1,63 @@
+{% extends 'main.html' %} {% block content %} {% load static %}
+<!-- <div class="share-story d-flex align-items-center justify-content-center">
+    <h4 class="display-5 fw-bold">
+        Odaberite početnu i završnu lokaciju
+    </h4>
+</div> -->
+
+<div class="px-50 pt-5 my-5 text-center border-bottom">
+  <h1 class="display-4 fw-bold">Dodajte novu vožnju</h1>
+  <div class="col-lg-6 mx-auto">
+    <p class="lead mb-4">
+      Klikom na mapu odaberite početnu, a zatim i završnu točku vaše vožnje.
+    </p>
+  </div>
+  <div class="overflow-hidden" style="max-height: 80vh">
+    <div class="container px-25">
+      <div id="map"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var map = L.map("map").setView([45.815399, 15.966568], 13);
+
+  data = {};
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "© OpenStreetMap",
+  }).addTo(map);
+  var gcs = L.esri.Geocoding.geocodeService();
+  var count = 0;
+  map.on("click", (e) => {
+    count += 1;
+    gcs
+      .reverse()
+      .latlng(e.latlng)
+      .run((err, res) => {
+        if (err) return;
+        L.marker(res.latlng)
+          .addTo(map)
+          .bindPopup(res.address.Match_addr)
+          .openPopup();
+        k = count.toString();
+        data[k + "lat"] = res.latlng["lat"];
+        data[k + "lon"] = res.latlng["lng"];
+        if (count == 2) {
+          const route_url =
+            "http://localhost:8000/" +
+            data["1lat"] +
+            "," +
+            data["1lon"] +
+            "," +
+            data["2lat"] +
+            "," +
+            data["2lon"];
+          count = 0;
+          window.location.replace(route_url);
+        }
+      });
+  });
+</script>
+
+{% endblock content %}

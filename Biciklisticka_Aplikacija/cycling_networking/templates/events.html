@@ -1,0 +1,161 @@
+{% extends 'main.html' %} {% block content %}
+{% load static %}
+
+<div class="events-table container">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <hr />
+    <div class="row">
+      <div class="col">
+        <!-- Name input -->
+        <select name="eventType" class="form-select" aria-label="Default select example">
+            <option value=""></option>
+            <option value="Bike Tour">Bike Tour</option>
+            <option value="BMX">BMX</option>
+            <option value="Brevet">Brevet</option>
+            <option value="Club Membership">Club Membership</option>
+            <option value="Cycling Camp">Cycling Camp</option>
+            <option value="Cyclocross">Cyclocross</option>
+            <option value="Fat Bike">Fat Bike</option>
+            <option value="Gift Card">Gift Card</option>
+            <option value="Gran Fondo">Gran Fondo</option>
+            <option value="Gravel Grinder">Gravel Grinder</option>
+            <option value="Hill Climb">Hill Climb</option>
+            <option value="Multisport">Multisport</option>
+            <option value="Off Road">Off Road</option>
+            <option value="Recreational">Recreational</option>
+            <option value="Road Race">Road Race</option>
+            <option value="Special Event">Special Event</option>
+            <option value="Time Trial">Time Trial</option>
+            <option value="Track">Track</option>
+            <option value="Virtual">Virtual</option>
+            <option value="Virtual Challenge">Virtual Challenge</option>
+        </select>
+        <label class="form-label" for="form8Example2">Tip događaja<label>
+      </div>
+      <div class="col">
+        <!-- Email input -->
+        <div class="form-outline">
+          <select name="eventLocation" class="form-select" aria-label="Default select example">
+            <option value=""></option>
+            <option value="Northeast">Northeast</option>
+            <option value="Mid Atlantic">Mid Atlantic</option>
+            <option value="Southeast">Southeast</option>
+            <option value="Midwest">Midwest</option>
+            <option value="Rocky Mountain">Rocky Mountain</option>
+            <option value="Southwest">Southwest</option>
+            <option value="Northwest">Northwest</option>
+            <option value="New England">New England</option>
+            <option value="South Central">South Central</option>    
+          </select>
+          <label class="form-label" for="form8Example2">Lokacija događaja</label>
+        </div>
+      </div>
+    </div>
+    
+    <hr />
+    
+    <div class="row">
+      <div class="col">
+        <!-- Name input -->
+        <div class="form-outline">
+          <input name="eventName" type="text" id="form8Example3" class="form-control" />
+          <label class="form-label" for="form8Example3">Naziv događaja</label>
+        </div>
+      </div>
+      <div class="col">
+        <!-- Name input -->
+        <div class="form-outline">
+          <input name="eventYear" type="text" id="form8Example4" class="form-control" />
+          <label class="form-label" for="form8Example4">Godina</label>
+        </div>
+      </div>
+      <div class="col">
+        <!-- Email input -->
+        <div class="form-outline">
+          <input name="eventDistance" type="text" id="form8Example5" class="form-control" />
+          <label class="form-label" for="form8Example5">Udaljenost</label>
+        </div>
+      </div>
+      <div class="input-group mb-3">
+        <button id="search-button" type="submit" class="btn btn-lg btn-primary rounded-3 m-1">
+          <i class="fas fa-search"></i> Pretraži događaj
+        </button>
+    </div>
+    </div>
+  </form>
+  
+    <table class="events-table table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Naziv</th>
+            <th>Grad</th>
+            <th>Datum</th>
+            <th>Kotizacija</th>
+            <th>Stranica</th>          
+          </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+          <tr>
+            <td>            
+                <div class="ms-3">
+                  <p class="fw-bold mb-1">{{ event.name }}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{ event.city }}</p>              
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ event.date }}</p>
+                <p class="text-muted mb-0">{{ event.date|date:'h:m' }}</p>
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ event.entry_fee }}</p>
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ event.url }}</p>
+            </td>                   
+          </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <nav class="my-4">
+        {% if events.has_other_pages %}
+          <ul class="pagination  pagination-lg pagination-circle justify-content-center">
+            {% if events.has_previous %}
+              <li class="page-item">
+                  <a class="page-link"  href="?page={{ events.previous_page_number }}" tabindex="-1" aria-disabled="true">&laquo;</a>
+              </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" disabled><span>&laquo;</span></a>
+            </li>
+            {% endif %}
+            {% for i in events.paginator.page_range %}
+              {% if events.number == i %}
+          
+                <li class="page-item active" aria-current="page"><span class="page-link">{{ i }} </span></li>
+              {% else %}
+                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if events.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ events.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" disabled><span>&raquo;</span></a>
+            </li>
+            {% endif %}
+          </ul>
+        {% endif %}
+        </nav>
+</div>
+
+{% endblock content %}

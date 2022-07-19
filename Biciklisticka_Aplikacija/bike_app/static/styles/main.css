@@ -1,0 +1,13 @@
+.my-small-btn {
+    width: 100px;
+    padding: 500px;
+}
+
+.cover-text {
+    padding: 15px;
+    text-align: center;
+}
+
+.container .events-table {
+    margin-bottom: 50px !important;
+}

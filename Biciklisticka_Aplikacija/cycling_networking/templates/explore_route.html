@@ -1,0 +1,149 @@
+{% block content %}
+<!DOCTYPE html>
+{% load static %}
+
+<html lang="en">
+<head>
+
+    <script src="https://kit.fontawesome.com/ef37872397.js" crossorigin="anonymous"></script>   
+    
+    {{map.header.render|safe}}    
+</head>
+<body>
+    {% include 'navbar.html' %}
+  
+    <div class="container" style="width:66% !important">   
+      <hr />                    
+            <section>
+              <div class="row">
+                <div class="col-12 mt-5 mb-2" style="margin-left: 1.25rem !important;">
+                  <h1 class="text-uppercase">{{ route.name }}</h1>
+                  <p class="fw-bold">Država: {{ route.country }}</p>
+                  <p class="fw-bold">Grad: {{ route.city }} </p>
+                  <p class="fw-bold">Opasna: {% if route.hazardous == False %} Ne {% else %} Da {% endif %}</p>
+                </div>
+              </div>
+      <hr />       
+              <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <div class="card" style="background-color: white !important;">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <i class="fas fa-road text-info fa-3x"></i>
+                      </div>
+                      <div class="text-end">
+                        <p class="mb-0">Duljina</p>
+                        <h3 class="fw-bold">{{ route.distance }} metara</h3>                 
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <div class="card" style="background-color: white !important;">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <i class="far fa-star text-warning fa-3x"></i>
+                      </div>
+                      <div class="text-end">
+                        <p class="mb-0">Prosječna ocjena</p>
+                        <h3 class="fw-bold">{{ route.average_grade }}</h3>         
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <div class="card" style="background-color: white !important;">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <i class="fas fa-star text-success fa-3x"></i>
+                      </div>
+                      <div class="text-end">
+                        <p class="mb-0">Najveća ocjena</p>
+                        <h3 class="fw-bold">{{ route.maximum_grade }}</h3>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-sm-6 col-12 mb-4">
+                <div class="card" style="background-color: white !important;">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between px-md-1">
+                      <div class="align-self-center">
+                        <i class="fas fa-mountain text-danger fa-3x"></i>
+                      </div>
+                      <div class="text-end">
+                        <p class="mb-0">Kategorija uspona</p>
+                        <h3 class="fw-bold">{{ route.climb_category }}</h3>  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                        
+            <div class="col-xl-12 col-12 mb-4">
+                {% if map %}                
+                    {{map.html.render|safe}}
+                {% endif %}
+            </div>
+        </section>
+    </div>
+    </div>
+    
+    <style>
+        * {
+            font-size:medium;
+        }
+
+        .nav-link:hover{
+            background-color: #F1FAEE !important;
+        }
+
+        .fs-4 { 
+            font-size: 2.5rem! important;
+        }   
+
+        .folium-map {
+            position: relative;
+            border: 1px solid black;
+            border-radius: 8px;
+            height: 500px !important;
+            width: 90% !important;
+            margin: 100px 0 200px 5% !important;
+        }
+
+        .col-md-4 {
+            margin: 100px 0 50px 0;
+            height: 400px;
+            width: 500px; 
+        }
+
+        form.form-new-route > * {
+            margin: 5px !important;
+        }
+
+        .btn-primary {
+            border: none !important;
+            background-image: none;
+            background-color: #E63946 !important;
+            width: 200px;
+            height: 40px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1D3557 !important;
+        }
+    </style>
+
+    
+</body>
+{% include 'footer.html' %}
+<script>
+    {{map.script.render|safe}}
+  </script>
+</html>
+{% endblock content %}
