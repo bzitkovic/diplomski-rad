@@ -1,0 +1,16 @@
+Baza podataka
+1. Napraviti restore baze podataka s datotekom baza-diplomski
+- aplikacija je napravljena koristeći PostgreSQL 
+2. U settings.py postaviti Vaš connection string za DATABASE = {}
+
+Aplikacija
+1. Pozicioniranje u Biciklisticka_Aplikacija
+2. Pokretanje naredbe za virtualno okruženje: .venv\scripts\activate  
+3. Pokretanje naredbe: python manage.py runserver
+4. Po potrebi instalirati pakete koji se nalaze u requirements.txt u virtualno okruženje
+ - pomoć: https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/
+
+Korisnici s kojima se može raditi (korisničko ime, lozinka)
+Administrator: admin, admin12admin (pristup administratorskom sučelju na lokaciji /admin)
+Agata: agata, 1234
+Ivan: ivan, 0000
