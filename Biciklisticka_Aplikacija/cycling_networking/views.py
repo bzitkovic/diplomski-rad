@@ -15,6 +15,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .rest_api.bike_reg_data import get_events
 from .rest_api.strava_data import get_routes
 from django.views.decorators.cache import cache_page
+from geopy.geocoders import Nominatim
 
 
 def home(request):
@@ -589,3 +590,36 @@ def exploreRoute(request):
     context = {"map": figure, "coors": [lat1, long1, lat2, long2], "route": strava_route}
 
     return render(request, "explore_route.html", context)
+
+
+def closeRoutes(request):
+    geolocator = Nominatim(user_agent="Kotur")
+    routes = []
+
+    if request.POST:
+        placeName = request.POST["placeName"]
+        location = geolocator.geocode(placeName)
+
+        if placeName == "":
+            return redirect("closeRoutes")
+
+        try:
+            routes = get_routes()
+        except:
+            messages.error(request, "Servis trenutno nedostupan!")
+            return redirect("home")
+
+        temp_routes = routes[:]
+        routes.clear()
+
+        for route_loop in temp_routes:
+            if (
+                abs(location.latitude - route_loop["start_latlng"][0]) < 0.5
+                and abs(location.longitude - route_loop["start_latlng"][1]) < 0.5
+            ):
+                routes.append(route_loop)
+
+        print(location.latitude, location.longitude)
+
+    context = {"routes": routes}
+    return render(request, "close_routes.html", context)

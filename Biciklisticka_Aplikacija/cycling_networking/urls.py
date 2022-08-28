@@ -29,4 +29,5 @@ urlpatterns = [
     path("deleteEvent", views.deleteEvent, name="deleteEvent"),
     path("routes", views.routes, name="routes"),
     path("exploreRoute", views.exploreRoute, name="exploreRoute"),
+    path("closeRoutes", views.closeRoutes, name="closeRoutes"),
 ]

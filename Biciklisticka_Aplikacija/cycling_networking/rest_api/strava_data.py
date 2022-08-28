@@ -17,6 +17,7 @@ def get_routes():
 
     response = requests.post(auth_url, data=payload, verify=False)
     access_token = response.json()["access_token"]
+    print(access_token)
 
     header = {"Authorization": "Bearer " + access_token}
     param = {"per_page": 200, "page": 1}

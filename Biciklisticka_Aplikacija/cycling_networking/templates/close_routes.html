@@ -1,0 +1,111 @@
+{% extends 'main.html' %} {% block content %}
+{% load static %}
+
+<div class="events-table container">
+  <form action="" method="POST">
+    {% csrf_token %}
+    <hr />
+    <div class="row">        
+      <div class="col">
+        <!-- Name input -->
+        <div class="form-outline">
+          <input name="placeName" type="text" id="placeNameId" class="form-control" />
+          <label class="form-label" for="placeName">Naziv mjesta</label>
+        </div>
+      </div>
+      
+      <div class="input-group mb-3">
+        <button id="search-button" type="submit" class="btn btn-lg btn-primary rounded-3 m-1">
+          <i class="fas fa-search"></i> Pretraži najbliže rute
+        </button>
+    </div>
+    </div>
+  </form>
+  <hr />
+  
+    <table class="events-table table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+          <tr>
+            <th>Naziv</th>
+            <th>Lokacija</th>
+            <th>Duljina (m)</th>
+            <th>Prosječna ocjena</th>
+            <th>Kategorija uspona</th>     
+            <th>Najviša uzvisina (m)</th>     
+            <th>Najniža uzvisina (m)</th>          
+          </tr>
+        </thead>
+        <tbody>
+            {% for route in routes %}
+          <tr>
+            <td>            
+                <div class="ms-3">
+                  <a href="exploreRoute?id={{ route.id }}">
+                    <p class="fw-bold mb-1">{{ route.name }}</p>
+                  </a> 
+                </div>
+              </div>
+            </td>
+            <td>
+              <p class="fw-normal mb-1">{{ route.city }}, {{ route.country }}</p>              
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ route.distance}}</p>          
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ route.average_grade }}</p>
+            </td>
+
+            <td>
+                <p class="fw-normal mb-1">{{ route.climb_category }}</p>
+            </td>
+            
+            <td>
+              <p class="fw-normal mb-1">{{ route.elevation_high }}</p>
+            </td>
+
+            <td>
+              <p class="fw-normal mb-1">{{ route.elevation_low }}</p>
+            </td>
+          </tr>
+         {% endfor %}
+        </tbody>
+    </table>
+
+    
+    <nav class="my-4">
+        {% if routes.has_other_pages %}
+          <ul class="pagination  pagination-lg pagination-circle justify-content-center">
+            {% if routes.has_previous %}
+              <li class="page-item">
+                  <a class="page-link"  href="?page={{ routes.previous_page_number }}" tabindex="-1" aria-disabled="true">&laquo;</a>
+              </li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" disabled><span>&laquo;</span></a>
+            </li>
+            {% endif %}
+            {% for i in routes.paginator.page_range %}
+              {% if routes.number == i %}
+          
+                <li class="page-item active" aria-current="page"><span class="page-link">{{ i }} </span></li>
+              {% else %}
+                <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+              {% endif %}
+            {% endfor %}
+            {% if routes.has_next %}
+              <li class="page-item"><a class="page-link" href="?page={{ routes.next_page_number }}">&raquo;</a></li>
+            {% else %}
+            <li class="page-item">
+              <a class="page-link" disabled><span>&raquo;</span></a>
+            </li>
+            {% endif %}
+          </ul>
+        {% endif %}
+        </nav>
+</div>
+
+
+{% endblock content %}
